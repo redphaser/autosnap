@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 
+"""
+This script provides a way to run rotating snapshots of a Rackspace
+Cloud Server on the OpenCloud infrastructure.
+
+Usage: autosnap.py <username> <APIKey> <ServerUUID> <Retention Count> <Region>
+"""
+
 import pyrax
 import re
 import argparse
 
 
 def delete_old(snap_list):
+    """Return an updated snapshot list after removing the oldest autosnap."""
     old = snap_list[0]
     for i in range(len(snap_list)-1):
         if old.created > snap_list[i+1].created:
