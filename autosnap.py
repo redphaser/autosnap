@@ -46,7 +46,7 @@ for i in images:
     if re.search(search_name, i.name + "$"):
         snap_list.append(i)
 
-#Create snapshot if number of current snaps LTE retention
+#Create snapshot if retention GTE number of previous autosnaps
 if args.retention >= len(snap_list):
     server.create_image(snap_name)
 
