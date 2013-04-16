@@ -12,52 +12,58 @@ import re
 import argparse
 
 
-def delete_old(snap_list):
+def delete_old(snap_list, cloud):
     """Return an updated snapshot list after removing the oldest autosnap."""
     old = snap_list[0]
     for i in range(len(snap_list)-1):
         if old.created > snap_list[i+1].created:
             old = snap_list[i+1]
-    cs.images.delete(old)
+    cloud.images.delete(old)
     snap_list.remove(old)
     return snap_list
 
-parser = argparse.ArgumentParser(description='auto-rotate image snapshots')
-parser.add_argument('user', metavar='username', type=str,
-                    help='Username for account')
-parser.add_argument('key', metavar='apikey', type=str,
-                    help='API key for account')
-parser.add_argument('server', metavar='server', type=str,
-                    help='UUID of server to snapshot')
-parser.add_argument('retention', metavar='retention', type=int,
-                    help='Number of days to retain snapthots')
-parser.add_argument('region', metavar='region', type=str,
-                    help='Region of Server (DFW, ORD, LON)',
-                    choices=['DFW', 'ORD', 'LON'])
+if __name__ == '__main__':
+    main()
 
-args = parser.parse_args()
 
-pyrax.set_credentials(args.user, args.key)
+def main():
+    """Parse arguments, take snap, and trigger deletion of oldest autosnap."""
+    parser = argparse.ArgumentParser(description='auto-rotate image snapshots')
+    parser.add_argument('user', metavar='username', type=str,
+                        help='Username for account')
+    parser.add_argument('key', metavar='apikey', type=str,
+                        help='API key for account')
+    parser.add_argument('server', metavar='server', type=str,
+                        help='UUID of server to snapshot')
+    parser.add_argument('retention', metavar='retention', type=int,
+                        help='Number of days to retain snapthots')
+    parser.add_argument('region', metavar='region', type=str,
+                        help='Region of Server (DFW, ORD, LON)',
+                        choices=['DFW', 'ORD', 'LON'])
 
-cs = pyrax.connect_to_cloudservers(region=args.region)
-server = cs.servers.get(args.server)
-images = cs.images.list()
+    args = parser.parse_args()
 
-server = cs.servers.get(args.server)
+    pyrax.set_credentials(args.user, args.key)
 
-snap_list = []
-snap_name = server.name + "-autosnap-" + args.server
+    cloud = pyrax.connect_to_cloudservers(region=args.region)
+    server = cloud.servers.get(args.server)
+    images = cloud.images.list()
 
-#Search for previous autosnaps of server and append to a list
-for i in images:
-    search_name = "-autosnap-" + args.server
-    if re.search(search_name, i.name + "$"):
-        snap_list.append(i)
+    server = cloud.servers.get(args.server)
 
-#Create snapshot if retention GTE number of previous autosnaps
-if args.retention >= len(snap_list):
-    server.create_image(snap_name)
+    snap_list = []
+    snap_name = server.name + "-autosnap-" + args.server
 
-#Delete oldest snapshot(s) if retention < num images
-while args.retention < len(snap_list):
-    snap_list = delete_old(snap_list)
+    #Search for previous autosnaps of server and append to a list
+    for i in images:
+        search_name = "-autosnap-" + args.server
+        if re.search(search_name, i.name + "$"):
+            snap_list.append(i)
+
+    #Create snapshot if retention GTE number of previous autosnaps
+    if args.retention >= len(snap_list):
+        server.create_image(snap_name)
+
+    #Delete oldest snapshot(s) if retention < num images
+    while args.retention < len(snap_list):
+        snap_list = delete_old(snap_list, cloud)
