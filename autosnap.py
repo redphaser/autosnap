@@ -22,9 +22,6 @@ def delete_old(snap_list, cloud):
     snap_list.remove(old)
     return snap_list
 
-if __name__ == '__main__':
-    main()
-
 
 def main():
     """Parse arguments, take snap, and trigger deletion of oldest autosnap."""
@@ -49,8 +46,6 @@ def main():
     server = cloud.servers.get(args.server)
     images = cloud.images.list()
 
-    server = cloud.servers.get(args.server)
-
     snap_list = []
     snap_name = server.name + "-autosnap-" + args.server
 
@@ -67,3 +62,7 @@ def main():
     #Delete oldest snapshot(s) if retention < num images
     while args.retention < len(snap_list):
         snap_list = delete_old(snap_list, cloud)
+
+
+if __name__ == '__main__':
+    main()
