@@ -40,10 +40,13 @@ def main():
 
     args = parser.parse_args()
 
-    pyrax.set_credentials(args.user, args.key)
+    pyrax.set_credentials(args.user, args.key, args.region)
 
     #Set up a cloud object based on region specified by user
-    cloud = pyrax.connect_to_cloudservers(region=args.region)
+    if args.region == "LON":
+        cloud = pyrax.cloudservers
+    else:
+        cloud = pyrax.connect_to_cloudservers(args.region)
 
     server = cloud.servers.get(args.server)
     images = cloud.images.list()
