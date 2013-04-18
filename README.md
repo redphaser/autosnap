@@ -119,6 +119,5 @@ Depending on how you use this script, it can be amazing or a bit of a pain.
 
 
 Eddie Bullard
-Rackspace Cloud Servers Support
 
-We like our weather cloudy.
+Rackspace Cloud Servers Support
