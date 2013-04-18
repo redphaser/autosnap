@@ -28,7 +28,7 @@ autosnap is a small python script that I wrote to fill in the gaps between now a
 
 It has been designed to be used primarily under Linux environments in conjunction with cron. 
 
-### INSTALLATION INSTRUCTIONS
+### INSTALLATION
 
 This script relies on the pyrax SDK for Rackspace OpenCloud. You can easily install it using python pip.
     
@@ -51,5 +51,41 @@ The next step to is actually pull down the script.
 Download the python script (git is the preferred method) to your selected directory. You can copy/paste the content of the script directly into a file if you wish (e.g. autosnap.py), just be sure it's executable or that you call it with python. If you do not have git, it can be installed via your distribution's package manager.
 
     git clone git://github.com/redphaser/autosnap.git
+
+Once you have your environment set up with pyrax/autosnap.py you can now set up cron to run the script. You do -not- need root privleges so this can be run as any user.
+
+### USAGE
+
+Here is what you will need to run autosnap (all of this can be found in your Cloud Control panel at mycloud.rackspace.com)...
+
+* Account username
+* API Key
+* Server UUID 
+* Server Region (DFW, ORD, Lon)
+* Desired Minimum Retention (explained in a moment)
+
+Let's see an example...
+
+    /your/folder/autosnap/autosnap.py rackuser abcdefghijklmnopqrstuvwxyz123456 abcdefgh-ijkl-mnop-qrst-uvwxyz123456 5 DFW
+
+The help text for autosnap explains each argument...
+
+    usage: autosnap.py [-h] username apikey server retention region
+    
+    auto-rotate image snapshots
+    
+    positional arguments:
+      username    Username for account
+      apikey      API key for account
+      server      UUID of server to autosnap
+      retention   Minimum number of autosnaps to retain
+      region      Region of Server (DFW, ORD, LON)
+    
+    optional arguments:
+      -h, --help  show this help message and exit
+
+Most of the arguments are self-explanatory. 
+
+To expand on Minimum Retention, this is a value passed that will determine the -Minimum- number of snapshots to save. 
 
 ### BEST PRACTICES
