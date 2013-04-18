@@ -1,4 +1,4 @@
-##Autosnap - A Python script for helping automate Rackspace OpenCloud Snapshots
+##Autosnap - Automatic Rotating Rackspace OpenCloud Snapshots
 
 Good Evening, Cloud!
 
