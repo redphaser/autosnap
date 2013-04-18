@@ -96,6 +96,8 @@ Most of the arguments are self-explanatory.
 
 To expand on Minimum Retention, this is a value passed that will determine the -Minimum- number of snapshots to save. During normal operation, the number of snapshots you have once they start to rotate will be retention + 1. The reasoning behind this is that if you have retention set to 1 snapshot you don't want a situation where you may be left with no valid snapshots available. 
 
+Additionally, if you decide to change the retetion value to something smaller on the next run autosnap.py will remove the oldest snapshots until the retention value is met (again, this is retention + 1).
+
 Now to set this up with cron.
 
 To have a basic setup of 7 rotating daily snapshots (this will leave you with 8 snapshots generally) that start at midnight (according to your system's time), your cron statement will look like this...
