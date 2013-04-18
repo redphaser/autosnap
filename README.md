@@ -100,7 +100,7 @@ Now to set this up with cron.
 
 To have a basic setup of 7 rotating daily snapshots (this will leave you with 8 snapshots generally) that start at midnight (according to your system's time), your cron statement will look like this...
 
-    ** 0 * * * /your/folder/autosnap/autosnap.py rackuser abcdefghijklmnopqrstuvwxyz123456 abcdefgh-ijkl-mnop-qrst-uvwxyz123456 7 DFW
+    * 0 * * * /your/folder/autosnap/autosnap.py rackuser abcdefghijklmnopqrstuvwxyz123456 abcdefgh-ijkl-mnop-qrst-uvwxyz123456 7 DFW
 
 Some great articles on how to use cron can be found at...
 
