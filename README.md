@@ -30,7 +30,7 @@ It has been designed to be used primarily under Linux environments in conjunctio
 
 ### INSTALLATION INSTRUCTIONS
 
-1. This script relies on the pyrax SDK for Rackspace OpenCloud. You can easitly install it using python pip like so.
+This script relies on the pyrax SDK for Rackspace OpenCloud. You can easitly install it using python pip like so.
     
     sudo pip install pyrax
 
