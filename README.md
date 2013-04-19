@@ -58,7 +58,7 @@ Download the python script (git is the preferred method) to your selected direct
 
 More documentation on git can be found at their website...
 
-![Git Documentation](http://git-scm.com/documentation)
+http://git-scm.com/documentation
 
 Once you have your environment set up with pyrax/autosnap.py you can now set up cron to run the script. You do -not- need root privleges so this can be run as any user.
 
@@ -106,8 +106,8 @@ To have a basic setup of 7 rotating daily snapshots (this will leave you with 8 
 
 Some great articles on how to use cron can be found at...
 
-![Basic Linux task scheduling with cron](http://www.rackspace.com/knowledge_center/article/basic-linux-task-scheduling-with-cron)
-![Fine-grained task scheduling with cron](http://ww.wip.rackspacecloud.com/knowledge_center/article/fine-grained-task-scheduling-with-crond)
+http://www.rackspace.com/knowledge_center/article/basic-linux-task-scheduling-with-cron
+http://ww.wip.rackspacecloud.com/knowledge_center/article/fine-grained-task-scheduling-with-crond
 
 ### BEST PRACTICES
 
