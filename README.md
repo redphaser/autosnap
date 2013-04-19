@@ -2,7 +2,7 @@
 
 Good Evening, Cloud!
 
-Due to high demand and numerous requests, I am be providing a way via cron and a small python script I have written to work around the current lack of automated snapshots within the Rackspace OpenCloud enviornment.
+Due to high demand and numerous requests, I am providing a way via cron and a small python script I have written to work around the current lack of automated snapshots within the Rackspace OpenCloud enviornment.
 
 To start off, a few disclaimers:
 
